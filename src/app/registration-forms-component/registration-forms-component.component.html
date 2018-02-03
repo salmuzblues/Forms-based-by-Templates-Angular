@@ -1,0 +1,120 @@
+<div class="row m-1">
+<div class="col-md-8">
+  <div class="box-header">
+    <h2>Registration Form</h2>
+  </div>
+  <div class="box-divider"></div>
+<div class="box-body">
+  <form novalidate #formRef="ngForm" (ngSubmit)="onSubmit(formRef.value)">
+    <div class="row">
+     <div class="col-sm-6 form-group">
+      <label>First name</label>
+  <!-- las variables de referencia (ejm: firstNameref) de la plantilla se exportan con el objeto del modelo(FormControl) de los
+   controles de entrada. Debemos usar propiedades para acceder a sus valores y Estados: como .value
+     enlace de propiedad [ngModel] = unidirectional data
+     Binding property [(ngModel)] = bidirectional  data
+
+     Note: If ngModel is used within a form tag, either the name attribute must be set
+     The <pre> tag defines preformatted text.
+     -->
+
+  <input type="text" class="form-control" name="firstName" ngModel #firstNameRef="ngModel"
+   required minlength="3" [class.ctrl-error]="firstNameRef.touched && firstNameRef?.errors?.required">
+  <!-- this is required for writing down the name -->
+   <div *ngIf="firstNameRef.touched && firstNameRef?.errors?.required" class="error-message">
+      The first name is required
+   </div>
+  <!-- This is required mini length, this case 3  -->
+    <div *ngIf="firstNameRef.hasError('minlength') && !firstNameRef.hasError('required')"  class =   "error-message" >
+      The first name should contain at less 3 characters
+    </div>
+</div>
+
+ <div class="col-sm-6 form-group">
+   <label>Last name</label>
+   <input type="text" class="form-control" name="lastName" ngModel #lastNameRef="ngModel"
+    [class.ctrl-error]="lastNameRef.touched && !lastNameRef.hasError('required')">
+   <div *ngIf="lastNameRef.touched && !lastNameRef.hasError('required')" class="error-message">
+     The last name is required.
+   </div>
+ </div>
+</div>
+
+  <div class="form-group">
+    <label>Email</label>
+  <input type="email" class="form-control" name="email" ngModel #emailRef="ngModel">
+  </div>
+    <div class="row">
+      <div class="col-sm-6 form-group">
+        <label>Enter Password</label>
+        <input type="password" class="form-control" name="password" ngModel #passwordRef="ngModel">
+      </div>
+      <div class="col-sm-6 form-group">
+        <label>Confirm Password</label>
+        <input type="password" class="form-control" name="confirmPassword" ngModel #confirmPaswordRef="ngModel">
+      </div>
+    </div>
+    <!-- another row-->
+    <div ngModelGroup="address" #addressRef="ngModelGroup">
+    <div class="row">
+      <div class="col-sm-6 form-group">
+        <label>Street</label>
+        <input type="text" class="form-control" name="street" ngModel #streetRef="ngModel">
+      </div>
+      <div class="col-sm-6 form-group">
+        <label>City</label>
+     <input type="text" class="form-control" name="city" ngModel #cityRef="ngModel">
+      </div>
+    </div>
+    <!-- Another row-->
+    <div class="row">
+      <div class="col-sm-6 form-group">
+        <label>State</label>
+        <input type="text" class="form-control" name="state" ngModel #stateRef="ngModel">
+      </div>
+      <div class="col-sm-6 form-group">
+        <label>Zip</label>
+    <input type="text" class="form-control" name="zip" ngModel #zipRef="ngModel">
+      </div>
+    </div>
+    <div class="form-group">
+       <label>Country</label>
+      <select class="form-control" name="country" ngModel="" #countryRef="ngModel">
+      <option value="IND">India</option>
+      <option value="US">United States of America</option>
+      </select>
+    </div>
+    </div>
+    <!-- Another row-->
+    <div class="row">
+      <div class="col-sm-12 form-group">
+         <label>Gender</label>
+        <div>
+         <label class="check-label">
+           <!-- The <i> tag defines a part of text in an alternate voice or mood.
+           The content of the <i> tag is usually displayed in italic.-->
+         <input type="radio" name="gender" value="Male" ngModel="" #genderRef="ngModel" >
+           <i class="blue"></i>Male</label>
+          <div class="spacer"></div>
+          <label class="check-label"> <input type="radio" name="gender" value="Female" ngModel="" #genderRef="ngModel">
+           <i class="blue"></i>Female</label>
+          <div class="spacer"></div>
+          <label class="check-label"><input type="radio" name="gender" value="Other" ngModel="" #genderRef="ngModel">
+          <i class="blue"></i>Other</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="check-label"><input type="checkbox"  name="agreement" value="" ngModel="" #agreementRef="ngModel">
+      <i class="blue"></i>I agree to the Terms of Services</label>\
+    </div>
+    <!-- Aunque hay errores en  el formulario , el usuario puede enviarlos, lo que no debería ser el caso, por lo que desactivaremos el botón
+       Submit si el formulario no es válido" -->
+    <button type="submit" class="btn btn-secondary" [disabled]="formRef.invalid">Submit</button>
+  </form>
+
+
+
+</div>
+</div>
+</div>
